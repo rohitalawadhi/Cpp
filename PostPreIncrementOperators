@@ -1,1 +1,64 @@
+// https://www.youtube.com/watch?v=XKPPLdKZIYs&ab_channel=LogicalProgrammer
+#include <iostream>
+
+using namespace std;
+
+int
+main ()
+{
+  int i = 10;
+  i = i++;
+  cout << i << endl;		// 10
+
+  i = 10;
+  i = ++i;
+  cout << i << endl;		// 11
+
+  i = 10;
+  i = i++ + i++;		// 10 + 11;
+  cout << i << endl;		// 21
+
+
+  i = 10;
+  i = i++ + ++i;		// 10 + 12;
+  cout << i << endl;		// 22
+
+  i = 10;
+  int j = i++ + ++i;		//10 + 12
+
+  cout << i << " " << j << endl;	//12 22
+
+  i = 10;
+  i = ++i + ++i;		// 11 + 12 --> 12 + 12;
+  cout << i << endl;		// 24
+
+
+  i = 10;
+  i = ++i + ++i + ++i;		//  12 + 12 + 13; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 37
+
+  i = 10;
+  i = ++i + i++ + ++i;		//  12 + 11 + 13; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 36
+
+  i = 10;
+  i = ++i + i++ + i++;		//  12 + 11 + 12; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 35
+  
+  i = 10;
+  i = i++ + ++i + ++i;		//  10 + 12 + 13; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 35
+ 
+  i = 10;
+  i = i++ + ++i + i++;		//  10 + 12 + 12; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 34
+  
+  i = 10;
+  i = i++ + ++i + i++ + i++;		//  10 + 12 + 12 + 13; // adds brackets like this ( ++i + ++i ) + ++i;
+  cout << i << endl;		// 47
+
+  i = 10;
+  cout<<i++<<" "<<i<<" "<<++i<<" "<<i<<endl;
+  return 0;
+}
 
