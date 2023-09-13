@@ -59,6 +59,12 @@ main ()
 
   i = 10;
   cout<<i++<<" "<<i<<" "<<++i<<" "<<i<<endl;
+
+   int i = 10;
+   int j = ++(i++);
+
+  cout<<j; //error: lvalue required as increment operand
+
   return 0;
 }
 
