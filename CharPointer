@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+
+int main()
+{
+    //read only operation is preferred in c++ for string to char pointer
+    const char *ptr = "rohit";
+    cout<<ptr[2]; // h
+    
+    // without const is forbidden and produces undefined behaviour if ptr is modified and used
+    char *ptr1 = "rohit";
+    ptr1[2] = 'k';
+    cout<<ptr1[2]; // undefined
+    
+    string s = "rohit";
+    char *ptr2 = new char[s.length() + 1];
+    strcpy(ptr2, s.c_str());// returns a pointer to null terminated charachters of a string
+    cout<<ptr2; // rohit
+    delete[] ptr2;
+    
+    // this also works
+    const char* str = s.c_str();
+    
+    
+    // Using for loop
+    std::string s = "GeeksForGeeks";
+    
+    // create a new array of chars to copy to (+1 for a null terminator)
+    char* char_array = new char[s.length() + 1];
+    
+    // make sure that the new string is null terminated
+    char_array[s.length()] = '\0';
+      
+    for (int i = 0; i < s.length(); i++) {
+        char_array[i] = s[i];
+    }
+  
+    std::cout << char_array;
+  
+    delete[] char_array;
+    
+    string s = "rohit";
+    char *ptr = &s[0];
+    cout<<ptr<<endl; //rohit
+    ptr[1] = 'p';//rphit
+    cout<<ptr;
+    
+    from c++17
+    string s = "rohit";
+    char *ptr = s.data();
+    cout<<ptr<<endl; //rohit
+    ptr[1] = 'p';//rphit
+    cout<<ptr;
+    
+    
+    return 0;
+}
