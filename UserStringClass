@@ -1,0 +1,79 @@
+#include <iostream>
+
+using namespace std;
+class st{
+    public:
+        char *ptr{nullptr};
+        int length{};
+        st(const char* &ptr1){
+            int index{};
+            while(ptr1[index] != '\0'){
+                index++;
+            }
+            length = index ;
+            ptr = new char[length + 1];
+            for(int i = 0; i < length; i++)
+                ptr[i] = ptr1[i];
+            ptr[length] = '\0';
+        }
+        st(const st& obj){
+            length = obj.length;
+            ptr = new char[length + 1];
+            for(int i = 0; i < length; i++)
+                ptr[i] = obj.ptr[i];
+            ptr[length] = '\0';
+        }
+        void operator=(const st& obj){
+            if(this == &obj)
+                return;
+            if(ptr)
+                delete[] ptr;
+                
+            ptr = new char[length + 1];
+            for(int i = 0; i < length; i++)
+                ptr[i] = obj.ptr[i];
+            ptr[length] = '\0';
+        }
+        void print(){
+            for(int i = 0; i < length; i++)
+                cout<<ptr[i];
+            cout<<endl;
+        }
+        void append(const char* & ap, int len){
+            char *temp = new char[length + len ];
+            for(int i{}; i < length + len; i++)
+            {
+                if(i < length)
+                    temp[i] = ptr[i];
+                else
+                    temp[i] = ap[i - length];
+            }
+            
+            if(ptr)
+                delete[] ptr;
+                
+            ptr = new char[length + len + 1];
+            for(int i{}; i < length + len; i++)
+            {
+                ptr[i] = temp[i];
+            }
+            ptr[length + len] = '\0';
+            length = length + len;
+            
+            if(temp)
+                delete[] temp;
+        }
+};
+
+int main()
+{
+    const char *s = "rohit";
+    st obj(s);
+    st obj2{obj};
+    obj.print();
+    obj2.print();
+    const char* p = "alawadhi";
+    obj.append(p, 8);
+    obj.print();
+    return 0;
+}
