@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+void thirdPartyLib(int *x){
+    int k = 10;
+    cout<<k + *x;
+}
+
+
+int main()
+{
+    const int a = 10;
+    const int *a1 = &a;
+    int *ptr = const_cast<int*>(a1);
+    *ptr = 18; // undefined behaviour
+    cout<<*ptr<<" "<<a<<endl;// 18, 10 due to compiler compilation
+    
+    int aa = 10;
+    const int *aaa = &aa;
+    int *ptr1 = const_cast<int*>(aaa);
+    *ptr1 = 18; // correct way
+    cout<<*ptr1<<" "<<aa<<endl;// 18, 18
+    
+    // use when third party library is using a non const value;
+    const int a2 = 10;
+    const int *a3 = &a2;
+    thirdPartyLib(const_cast<int*>(a3));// make sure the library in this case is not modifying a3
+
+
+    return 0;
+}
