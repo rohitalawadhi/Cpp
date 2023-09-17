@@ -5,7 +5,16 @@ void thirdPartyLib(int *x){
     cout<<k + *x;
 }
 
-
+class rohit{
+    int c;
+    public:
+        void fn() const{
+            
+           const_cast<int&>(c) = 11;
+           cout<<endl<<c;
+        }
+    
+};
 int main()
 {
     const int a = 10;
@@ -25,6 +34,8 @@ int main()
     const int *a3 = &a2;
     thirdPartyLib(const_cast<int*>(a3));// make sure the library in this case is not modifying a3
 
+    rohit obj;
+    obj.fn();
 
     return 0;
 }
