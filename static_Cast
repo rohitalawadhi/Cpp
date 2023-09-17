@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+class Int{
+        int x{};
+    public:
+        Int(int c):x{c}{
+            cout<<"conversion constructor"<<endl;
+        }
+        
+        operator string(){
+            cout<<"conversion op"<<endl;
+            return to_string(x);
+        }
+    
+};
+
+class rohit{};
+class alawadhi: private rohit{};
+
+class rohit1{};
+class alawadhi1: public rohit1{};
+
+int main()
+{
+    //easier to find , rather than doing i = f while searching in the code.
+    float f = 10.0f;
+    int i;
+    i = static_cast<int>(f);
+    cout<<i; //10
+    
+    
+    
+    //static_cast for conversion operator and conversion constructor
+    Int obj(1);
+    string s = obj; // conversion op
+    obj = 20; // conversion constructor
+    
+    string s1 = static_cast<string>(obj); // conversion op
+    obj = static_cast<Int>(30); // conversion constructor
+    
+    //failure prone code in c-style cast
+    char p; // 1 bytes
+    int *pp = (int *)&p; // undefined behaviour - 4 bytes
+    *pp = 5;
+    
+    int *ip = static_cast<int*>(&p);// Fails at compile time - error: invalid ‘static_cast’ from type ‘char*’ to type ‘int*’
+    
+    alawadhi obj1;
+    rohit *obj2 = (rohit*)&obj1;
+    rohit *obj21 = &obj1;
+    rohit *obj3 = static_cast<rohit*>(&obj1);// note: inheritance is private , error: ‘rohit’ is an inaccessible base of ‘alawadhi’
+    
+    alawadhi1 obj1;
+    rohit1 *ptr = static_cast<rohit1*>(&obj1);
+    alawadhi1 *ptr2 = static_cast<alawadhi1*>(ptr);// should be avoided as staic cast does not check the down-cast here.
+    
+    
+    // convert from and to void* 
+    int i = 10;
+    void *p = static_cast<void*>(&i);
+    int *pt = static_cast<int*>(p);
+    return 0;
+}
