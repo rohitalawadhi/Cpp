@@ -1,0 +1,50 @@
+// https://www.youtube.com/watch?v=JBvEfB_F66o&list=PLk6CEY9XxSIC6I_HCjMTGf8eV2Ty0a19E&index=6&ab_channel=CppNuts
+#include <iostream>
+
+using namespace std;
+class Mango{
+    public:
+        void eatMango(){
+            cout<<"Eating mango";
+        }
+    
+};
+
+class Banana{
+    public:
+        void eatBanana(){
+            cout<<"Eating banana";
+        }
+    
+};
+
+struct myStruct{
+    int x{5};
+    int y{4};
+    char c{'a'};
+    bool b{true};
+};
+
+int main() 
+{
+    Mango *m = new Mango();
+    Banana *newBanana = reinterpret_cast<Banana*>(m);
+    newBanana->eatBanana();
+    // Works something like this
+    /*
+    Banana::eatBanana(newBanana, arg1, arg2, ...);
+    */
+    
+    myStruct s;
+    int *p = reinterpret_cast<int*>(&s);
+    cout<<endl<<*p<<endl; //5
+    p++;
+    cout<<*p<<endl; //4
+    p++;
+    char *c = reinterpret_cast<char*>(p);
+    cout<<*c<<endl;
+    c++;
+    bool *t = reinterpret_cast<bool*>(c);
+    cout<<*t<<endl;
+    return 0;
+}
