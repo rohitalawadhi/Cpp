@@ -1,0 +1,27 @@
+// r.cpp
+// include header only once else there will be linking errors.
+#include <iostream>
+#include "r.h"
+using namespace std;
+extern int x; // definition
+int main() {
+	fun();
+	cout<<x;
+	return 0;
+}
+
+
+// r.h
+int x; // declaration
+
+void fun();
+
+
+// rohit.cpp
+
+static int x; // for visibility only in this file
+extern int x; // for visibility from other files.
+void fun(){
+	x++;
+
+}
