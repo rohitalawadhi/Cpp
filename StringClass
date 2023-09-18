@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+int main() 
+{
+    string s("Hello");
+    cout<<s<<endl; //Hello
+    string s1{"Hello"};
+    cout<<s1<<endl; //Hello
+    string s2{"Hello", 3};
+    cout<<s2<<endl; // Hel
+    string s3{"Hello", 2, 2};
+    cout<<s3<<endl; // ll
+    string s4(2, 'c');
+    cout<<s4<<endl; // cc
+    string s5({'a', 'b', 'c'});
+    cout<<s5<<endl; //abc
+    
+    // s.size() and s.length() are same
+    cout<<s5.capacity()<<endl;// 15
+    s5.reserve(100);
+    cout<<s5.capacity()<<endl;//100
+    s5.reserve(1);
+    cout<<s5.capacity()<<endl<<s5<<endl;//100 abc
+    s5.shrink_to_fit();
+    cout<<s5.capacity()<<endl;// 15
+    s5.resize(5);
+    cout<<s5.capacity()<<endl<<s5<<endl;//15 abc
+    s5.resize(6,'x');
+    cout<<s5.capacity()<<endl<<s5<<endl<<s5.size()<<endl;//15 abc  x 6
+    for(int i{}; i < s5.size(); i++)
+        cout<<s5[i]<<" ";// a b c   x
+    s5.resize(2);
+    cout<<s5.capacity()<<endl<<s5<<endl<<s5.size()<<endl;//15 ab 2
+    
+    
+    return 0;
+}
