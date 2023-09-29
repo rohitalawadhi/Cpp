@@ -1,3 +1,5 @@
+// https://www.learncpp.com/cpp-tutorial/template-classes/
+
 #include <iostream>
 #include <algorithm>
 #include <cassert>
@@ -49,7 +51,20 @@ using namespace std;
 
 	obj[2] = 12; tries to access the [] operator, compilation works fine as compiler stiches r.h contents in r.cpp while
 	compilation but when it tries to link the definition with declaration it doesnt find any, since the function call to
-	[] operator was never made in rohit.cpp file where it is written.
+	[] operator was never made in rohit.cpp file where it is written. To solve we can put code of rohit.cpp in rohit.h
+	but that can affect the compile and linking time.
+
+If you feel that putting the Array.cpp code into the Array.h header makes the header too long/messy, an alternative is to move
+the contents of Array.cpp to a new file named Array.inl (.inl stands for inline), and then include Array.inl
+at the bottom of the Array.h header (inside the header guard). That yields the same result as putting all 
+the code in the header, but helps keep things a little more organized.
+
+Other solutions involve #including .cpp files, but we don’t recommend these because of the non-standard usage of #include.
+Another alternative is to use a three-file approach. The template class definition goes in the header.
+The template class member functions goes in the code file. Then you add a third file, which contains all of the instantiated classes you need:
+
+
+
   */
 
 int main() {
