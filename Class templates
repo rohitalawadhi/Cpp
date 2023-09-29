@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+
+
+template<typename T>
+class rohit{
+	T x[10];
+public:
+	void fn(){
+		cout<<x;
+	}
+//	T& operator[](int index){
+//		assert(index >= 0 and index < 10);
+//		return x[index];
+//	}
+	T& operator[](int index);
+
+};
+
+template<typename T>
+T& rohit<T>::operator[](int index){
+	assert(index >= 0 and index < 10);
+	return x[index];
+}
+
+int main() {
+	rohit<int> obj;
+	obj[2] = 12;
+	cout<<obj[2]; //12
+	return 0;
+}
