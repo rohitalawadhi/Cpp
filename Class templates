@@ -31,3 +31,54 @@ int main() {
 	cout<<obj[2]; //12
 	return 0;
 }
+---------------------------------------
+
+r.cpp
+
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+#include "r.h"
+
+/*
+  Linker error
+  Undefined symbols for architecture x86_64:
+  "rohit<int>::operator[](int)", referenced from:
+      _main in r.o
+
+	obj[2] = 12; tries to access the [] operator, compilation works fine as compiler stiches r.h contents in r.cpp while
+	compilation but when it tries to link the definition with declaration it doesnt find any, since the function call to
+	[] operator was never made in rohit.cpp file where it is written.
+  */
+
+int main() {
+	rohit<int> obj;
+	obj[2] = 12;
+	cout<<obj[2]; //12
+	return 0;
+}
+
+
+
+r.h
+
+template<typename T>
+class rohit{
+	T x[10];
+public:
+	T& operator[](int index);
+
+};
+
+
+
+rohit.cpp
+
+
+#include "r.h"
+
+template<typename T>
+T& rohit<T>::operator[](int index){
+	return x[index];
+}
