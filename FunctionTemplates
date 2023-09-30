@@ -33,3 +33,23 @@ int main()
 
     return 0;
 }
+
+
+________________________________________________________________
+
+
+//instantiation happens like, function template instantiaition
+template<class s>
+void fn(s t){
+	cout<<t;
+}
+
+//becomes:
+template<>
+void fn(int t){
+	cout<<t;
+}
+
+int main(){
+	fn<int>(2);
+}
