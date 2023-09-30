@@ -124,3 +124,47 @@ int main()
     addOne(s);
     return 0;
 }
+
+
+--------------------------------------------
+
+https://www.learncpp.com/cpp-tutorial/function-template-instantiation/
+
+This works somehow  but fix is below:
+#include <iostream>
+
+template <typename T>
+T addOne(T x)
+{
+    return x + 1;
+}
+
+int main()
+{
+    std::cout << addOne("Hello, world!") << '\n'; // ello, world!
+
+    return 0;
+}
+
+#include <iostream>
+#include <string>
+
+template <typename T>
+T addOne(T x)
+{
+    return x + 1;
+}
+
+// Use function template specialization to tell the compiler that addOne(const char*) should emit a compilation error
+template <>
+const char* addOne(const char* x) = delete;
+
+int main()
+{
+    std::cout << addOne("Hello, world!") << '\n'; // compile error
+
+    return 0;
+}
+
+
+Read Using function templates in multiple files from https://www.learncpp.com/cpp-tutorial/function-template-instantiation/
