@@ -58,3 +58,47 @@ int main(){
 }
 
 
+-----------------------------------------------------------------------
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+//automatic deduction of function
+template<typename T>
+void fn(T value){
+	cout<<value;
+}
+
+void fn(int s){
+	cout<<"i am here "<< s;
+}
+int main(){
+
+	//automatic deduction of function
+	fn<int>(2); // 2
+	fn<>(2); // 2
+	fn(2); // 2
+
+	// if normal function is present along with templates then fn(2) will most likely call that
+	fn(2); //i am here 2
+
+}
+
+// T is a type template parameter
+// double is a non-template parameter
+template <typename T>
+int someFcn (T, double)
+{
+    return 5;
+}
+
+int main()
+{
+    someFcn(1, 3.4); // matches someFcn(int, double)
+    someFcn(1, 3.4f); // matches someFcn(int, double) -- the float is promoted to a double
+    someFcn(1.2, 3.4); // matches someFcn(double, double)
+    someFcn(1.2f, 3.4); // matches someFcn(float, double)
+    someFcn(1.2f, 3.4f); // matches someFcn(float, double) -- the float is promoted to a double
+
+    return 0;
+}
