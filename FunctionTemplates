@@ -45,11 +45,16 @@ void fn(s t){
 }
 
 //becomes:
+template<class s>
+void fn(s t);
+
 template<>
-void fn(int t){
+void fn<int>(int t){
 	cout<<t;
 }
 
 int main(){
 	fn<int>(2);
 }
+
+
