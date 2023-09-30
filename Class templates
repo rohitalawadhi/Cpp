@@ -97,3 +97,110 @@ template<typename T>
 T& rohit<T>::operator[](int index){
 	return x[index];
 }
+ ----------------------------------------------------
+
+
+
+https://www.learncpp.com/cpp-tutorial/template-non-type-parameters/
+
+#include <iostream>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+//#include "r.h"
+
+template<typename T, int size>
+class array1{
+
+	T _array[size];
+public:
+	T* getArray();
+	T& operator[](int index){
+		assert(index >= 0 and index < size);
+		return _array[index];
+	}
+};
+
+template<typename T, int size>
+T* array1<T, size>::getArray(){
+	return _array;
+}
+int main(){
+	array1<int, 19> obj;
+	obj[2] = 11;
+	cout<<obj[2]<<" "<<obj.getArray(); // 11 0x30dcab270
+
+}
+
+
+--------------------------------------------------------------------
+https://www.learncpp.com/cpp-tutorial/function-template-specialization/
+
+#include <iostream>
+using namespace std;
+
+// does shallow copy and then
+template<typename T>
+class array1{
+	T m_value;
+public:
+	array1(T value): m_value{value}{}
+	void print(){
+		cout<<m_value;
+	}
+};
+
+int main(){
+	string s = "rohit";
+	array1<char*> obj(s.data());
+	obj.print();// prints rohit
+	s.clear();
+	cout<<endl;
+	obj.print(); // prints nothing, since it was a shallow copy, does not work fine for dynamic memory, hence deep copy required.
+}
+
+
+FIX:
+
+#include <iostream>
+using namespace std;
+
+template<typename T>
+class array1{
+	T m_value;
+public:
+	array1(T value): m_value{value}{}
+	void print(){
+		cout<<m_value;
+	}
+	~array1(){}
+};
+
+template<>
+array1<char*>::array1(char* value){
+	if(!value)
+		return;
+	int length{};
+
+	while(value[length] != '\0')
+		length++;
+	++length;
+	m_value = new char[length];
+	for(int i{}; i < length; i++)
+		m_value[i] = value[i];
+}
+template<>
+array1<char*>::~array1(){
+	delete[] m_value;
+}
+int main(){
+	string s = "rohit";
+	array1<char*> obj(s.data());
+	array1<int> obj2(2);
+	obj2.print(); //2
+	obj.print();// rohit
+	s.clear();
+	cout<<endl;
+	obj.print();// rohit
+
+}
