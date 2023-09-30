@@ -204,3 +204,52 @@ int main(){
 	obj.print();// rohit
 
 }
+------------------------------------------------------------
+
+
+https://www.learncpp.com/cpp-tutorial/partial-template-specialization/
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+template<typename T, int size>
+class rohit{
+protected:
+	T _array[size];
+public:
+	T& operator[](int index){
+		return _array[index];
+	}
+	void print(){
+		for(int i{}; i < size; i++)
+			cout<<_array[i]<<" ";
+	}
+};
+
+template<typename T, int size>
+class derived: public rohit<T, size>{};
+
+// inheriting a char from a char base class
+template<int size>
+class derived<char, size>: public rohit<char, size>{
+public:
+	void print(){
+		for(int i{}; i < size; i++)
+			cout<<this->_array[i];
+	}
+
+};
+
+int main(){
+	derived<int, 4> obj;
+	for(int i{}; i < 4; i++)
+		obj[i] = i;
+	obj.print();
+	cout<<endl;// 0 1 2 3
+	derived<char, 4> obj1;
+	for(int i{}; i < 4; i++)
+		obj1[i] = static_cast<char>(97+i);
+	obj1.print();// abcd
+}
+
