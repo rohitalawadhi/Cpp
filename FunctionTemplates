@@ -14,3 +14,22 @@ void fn(s t){
 int main(){
 	fn("rohit");
 }
+
+When the compiler encounters the function call max<int>(1, 2), it will determine that a function definition for max<int>(int, int) does not already exist. Consequently, the compiler will use our max<T> function template to create one.
+
+The process of creating functions (with specific types) from function templates (with template types) is called function template instantiation (or instantiation for short). When this process happens due to a function call, it’s called implicit instantiation. An instantiated function is often called a function instance (instance for short) or a template function. Function instances are normal functions in all regards.
+
+#include <iostream>
+
+template <typename T>
+T max(T x, T y)
+{
+    return (x < y) ? y : x;
+}
+
+int main()
+{
+    std::cout << max<int>(1, 2) << '\n'; // instantiates and calls function max<int>(int, int)
+
+    return 0;
+}
