@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+// There is no difference between the typename and class keywords in this context. 
+//You will often see people use the class keyword since it was introduced into the language earlier. 
+//However, we prefer the newer typename keyword, because it makes it clearer that the type template parameter can be replaced by any type (such as a fundamental type), not just class types.
+
+template<class s>
+void fn(s t){
+	cout<<t;
+}
+
+int main(){
+	fn("rohit");
+}
