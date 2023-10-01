@@ -168,3 +168,56 @@ int main()
 
 
 Read Using function templates in multiple files from https://www.learncpp.com/cpp-tutorial/function-template-instantiation/
+_____________________________________________________________________________
+
+This is error prone
+#include <iostream>
+using namespace std;
+
+template<typename T>
+void fn(T x, T y){
+	cout<<x<<y;
+}
+
+int main(){
+
+	fn(2,3.3);//  error: no matching function for call to 'fn'
+
+	return 0;
+}
+
+This will also not work
+
+int main(){
+
+	fn<int, double>(2,3.3);
+
+	return 0;
+}
+
+type conversion is done only when resolving function overloads, not when performing template argument deduction.
+
+This will work
+1. Tell its double to compiler
+
+int main(){
+
+	fn<double>(2,3.3);
+
+	return 0;
+}
+
+2. make a double non-template fn
+void fn(double x, double y){
+	cout<<x<<y;
+}
+
+3.
+int main(){
+
+	fn(static_cast<double>(2),3.3);
+
+	return 0;
+}
+
+
