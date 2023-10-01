@@ -397,3 +397,32 @@ int main(){
 	cout<<max<double>(f1)<<endl;
 	return 0;
 }
+
+
+--------------------------------------------------------------------
+
+
+Class templates with multiple template types
+
+#include<cmath>
+#include <iostream>
+using namespace std;
+
+template<typename T, typename U>
+struct rohit{
+public:
+	T f{};
+	U s{};
+};
+
+template<typename T, typename U>
+void max(rohit<T, U> s){
+	cout<<s.f<<" "<<s.s<<endl;
+}
+
+int main(){
+	rohit<int, int> f{1,2};
+	max<int, int>(f);
+	rohit<double, double> f1{1.3,2.4};
+	max<double, double>(f1);
+	return 0;
