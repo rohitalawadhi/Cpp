@@ -288,7 +288,7 @@ int main(){
 }
 
 
-auto deduction using auto : 
+auto deduction using auto : C++17
 #include <iostream>
 
 template <auto N> // deduce non-type template parameter from template argument
