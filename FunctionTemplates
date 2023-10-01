@@ -220,4 +220,31 @@ int main(){
 	return 0;
 }
 
+4.
+template<typename T, typename U>
+void fn(T x, U y){
+	cout<<x<<y;
+}
+
+
+Two ways of using abbreviated function template c++20 and beyond
+
+#include <iostream>
+using namespace std;
+
+template<typename T>
+auto fn(T x, T y){
+	cout<<x<<y;
+}
+
+auto fn(auto x, auto y){
+	cout<<x<<y<<"rohit";
+}
+int main(){
+
+	fn<double>(2,3.3);
+
+	return 0;
+}
+
 
