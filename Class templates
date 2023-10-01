@@ -318,4 +318,55 @@ int main(){
 
 
 https://www.learncpp.com/cpp-tutorial/partial-template-specialization-for-pointers/
+--------------------------------------------------------------------------
 
+For structs
+
+
+#include<cmath>
+#include <iostream>
+using namespace std;
+template<typename T>
+struct rohit{
+
+	T f{};
+	T s{};
+};
+
+int main(){
+	rohit<int> obj{1, 1};
+	cout<<obj.f<<obj.s;
+	return 0;
+}
+
+--------------------------------------------------------------------
+
+#include<cmath>
+#include <iostream>
+using namespace std;
+
+//expansion looks like this
+
+template<typename T>
+struct rohit;
+
+template<>
+struct rohit<int>{
+	int f{};
+	int s{};
+};
+
+template<>
+struct rohit<double>{
+	double f{};
+	double s{};
+};
+
+int main(){
+	rohit<int> obj{1, 1};
+	rohit<double> obj1{1.1, 1.1};
+	cout<<obj.f<<" "<<obj.s;
+	cout<<endl;
+	cout<<obj1.f<<" "<<obj1.s;
+	return 0;
+}
