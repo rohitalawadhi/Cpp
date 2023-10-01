@@ -581,3 +581,31 @@ int main()
 	print(pp);
 	return 0;
 }
+
+
+______________________________________________________________________
+Works for injected class names:
+#include <iostream>
+#include <utility>
+using namespace std;
+
+template<typename T>
+struct Pair{
+
+	T first{};
+	T second{};
+};
+template<typename T>
+using point = Pair<T>;
+
+template<typename point>
+void print(const point& p){
+	cout<<p.first<<' '<<p.second<<endl;
+}
+int main()
+{
+	point<int> pp{1,2};// c++17
+	//point p1{1,2};// works in c++ 20
+	print(pp);
+	return 0;
+}
