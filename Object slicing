@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+class base{
+    int c{};
+    public:
+    virtual void fn(){
+        cout<<"I am in base\n";
+    }
+    
+};
+
+class derived: public base{
+    public:
+    void fn() override{
+        cout<<"I am in derived\n";
+    }
+    
+};
+int main()
+{
+    derived obj2;
+    base &obj = obj2;
+    obj.fn();// I am in derived
+    base obj1 = obj2;
+    obj1.fn();// I am in base , derived is sliced off.
+    return 0;
+}
