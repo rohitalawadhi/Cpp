@@ -1,0 +1,45 @@
+Is this call ambigous ? yes!
+
+#include <iostream>
+
+using namespace std;
+class rohit{
+    
+    int x1;
+public:
+    rohit(){
+      cout<<"hi rohit";
+    }
+    
+    rohit(int x = 99){
+        cout<<"hi rohit11";
+    }
+};
+int main()
+{
+    rohit obj;
+    return 0;
+}
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Initialise reference with dynamic memory
+https://www.geeksforgeeks.org/reference-to-dynamic-objects-in-cpp/
+https://stackoverflow.com/questions/10023632/c-reference-to-dynamic-memory
+
+#include <iostream>
+
+using namespace std;
+class rohit{};
+int main()
+{
+    rohit &obj = *(new rohit);
+    delete &obj;
+    int &ans = *(new int(1)); 
+    cout<<ans; // 1
+    delete &ans; // delete ans doesnt work  - >  error: type ‘int’ argument given to ‘delete’, expected pointer
+    return 0;
+}
+
+
+
