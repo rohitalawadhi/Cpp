@@ -26,3 +26,21 @@ int main()
     obj1.fn();// I am in base , derived is sliced off.
     return 0;
 }
+
+Error case:
+
+    derived o;
+    base r;
+    o = r;
+    o.fn();
+
+main.cpp: In function ‘int main()’:
+main.cpp:37:9: error: no match for ‘operator=’ (operand types are ‘derived’ and ‘base’)
+   37 |     o = r;
+      |         ^
+main.cpp:21:7: note: candidate: ‘constexpr derived& derived::operator=(const derived&)’
+   21 | class derived: public base{
+      |       ^~~~~~~
+main.cpp:21:7: note:   no known conversion for argument 1 from ‘base’ to ‘const derived&’
+main.cpp:21:7: note: candidate: ‘constexpr derived& derived::operator=(derived&&)’
+main.cpp:21:7: note:   no known conversion for argument 1 from ‘base’ to ‘derived&&’
