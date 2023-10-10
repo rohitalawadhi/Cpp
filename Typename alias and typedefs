@@ -1,0 +1,11 @@
+#include <iostream>
+
+using namespace std;
+using dubble = double;
+int main()
+{
+    dubble x{1.1};
+    cout<<x;
+
+    return 0;
+}
