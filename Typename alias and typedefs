@@ -1,3 +1,4 @@
+https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/
 #include <iostream>
 
 using namespace std;
@@ -7,5 +8,68 @@ int main()
     dubble x{1.1};
     cout<<x;
 
+    return 0;
+}
+
+In modern C++, the convention is to name type aliases (or any other type) that you define yourself starting with a capital letter, and using no suffix. 
+The capital letter helps differentiate the names of types from the names of variables and functions (which start 
+with a lower case letter), and prevents naming collisions between them.
+
+Type aliases that end in a “_t” suffix (the “_t” is short for “type”). This convention is often used by the standard library for globally scoped type names (like size_t and nullptr_t).
+This convention was inherited from C, and used to be the most popular when defining your own type aliases (and sometimes other types), but has fallen out of favor in modern C++. 
+Note that POSIX reserves the “_t” suffix for globally scoped type names, so using this convention may cause type naming conflicts on POSIX systems.
+
+Because the compiler does not prevent these kinds of semantic errors for type aliases, we say that aliases are not type safe. In spite of that, they are still useful.
+void printDistance(Distance distance); 
+
+----------------------------------------
+
+Some languages support the concept of a strong typedef (or strong type alias). A strong typedef actually creates a new type that has all the original properties of the original type, but the compiler will throw an error if you try to mix values of the aliased type and the strong typedef. As of C++20, C++ does not directly support strong typedefs (though enum classes, covered in lesson 13.4
+-- Scoped enumerations (enum classes), are similar), but there are quite a few 3rd party C++ libraries that implement strong typedef-like behavior.
+
+// The following is syntactically valid (but semantically meaningless)
+
+int main()
+{
+    dubble x{1.1};
+    dubble y{2.2};
+    x = y;
+    cout<<x;
+    return 0;
+}
+
+A typedef (short for "type definition") is an older way for creating an alias for a type.
+
+typedef long Miles; // type comes first
+using Miles = long; is same
+
+Typedefs issues:
+Harder to read;
+
+typedef int (*FcnType)(double, char);
+instead use:
+using FcnType = int(*)(double, char);
+
+Example:
+#include <iostream>
+using namespace std;
+
+using Grade = char;
+typedef char GradeValue_t;
+
+
+Grade foo(){
+    return 97;
+}
+
+GradeValue_t foo1(){
+    return 97;
+}
+
+int main()
+{
+    
+    cout<<foo()<<endl;
+    cout<<foo1();
     return 0;
 }
