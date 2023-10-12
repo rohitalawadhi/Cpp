@@ -158,3 +158,51 @@ int main()
     
     return 0;
 }
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    string s{""};
+    // cin>>s;
+    // cout <<s;
+    // getline(cin, s);
+    // cout<<s<<endl;
+    // getline(cin, s, ';');
+    // cout<<s<<endl;
+    /*
+    rohit
+    rohit
+    rohit;hello
+    rohit
+    */
+    // for numbers to string
+    string g = to_string(8);
+    cout<<g<<endl; // 8
+    g = to_string(2.3e7);
+    cout<<g<<endl;// 23000000.000000
+    g = to_string(0xa4);
+    cout<<g<<endl;// 164
+    g = to_string(034);
+    cout<<g<<endl;// 28
+    
+    //convert string to a number
+    g = "190";
+    int i = stoi(g);
+    cout<<i<<endl;// 190
+    g = "190 monkeys";
+    size_t pos;
+    i = stoi(g, &pos);
+    cout<<i<<" "<<pos<<endl;// 190 3 , pos is the position where it stopped counting the charachters of string
+    g = "a monkey";
+    //i = stoi(g, &pos);
+    //cout<<i<<" "<<pos<<endl;
+    // terminate called after throwing an instance of 'std::invalid_argument'
+    // what():  stoi
+    
+    i = stoi(g, &pos, 16);
+    cout<<i<<" "<<pos<<endl;// 10 1 , converts hex value to integer.
+    
+    // stod, stol, stof, lexical_cast, stringstream
+    return 0;
+}
