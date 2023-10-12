@@ -105,5 +105,56 @@ int main()
     cout<<d.substr(2,3)<<endl;// dhi
     d = "rohit";
     d.c_str(); // "rohit\0", s.data() is same post c++11;
+    string s {"rohit"};
+    string s2{"alawadhi"};
+    s.swap(s2);
+    cout<<s<<s2;// alawadhirohit
+    return 0;
+}
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    string s{"rohit"};
+    char buf[20];
+    size_t len = s.copy(buf, 3);
+    cout<<buf<<endl<<len;// roh 3
+    len = s.copy(buf, 3, 2);// (buf, charachters, starting position)
+    cout<<buf<<endl<<len<<'\n';// hit 3
+    s = "If a job is worth doing, its worth doing well";
+    size_t found = s.find("doing");
+    cout<<found <<endl;// 18
+    found = s.find("doing", 20);
+    cout<<found <<endl;// 35
+    found = s.find("doing well", 0);
+    cout<<found <<endl;// 35
+    found = s.find("doing well", 0, 5);// start from 0 and look fr first 5 charachters only
+    cout<<found <<endl;// 18
+    found = s.find_first_of("Iing");// find first of any charchter in the argument 
+    cout<<found <<endl;// 0
+    found = s.find_first_of("Iing", 10);// find first of any charchter in the argument starting from 10
+    cout<<found <<endl;// 20
+    found = s.find_first_of("doing", 10, 1);// look at only the first charchter in the argument from posiiton 10
+    cout<<found<<endl;//18
+    found = s.find_last_of("doing");
+    cout<<found<<endl;//39
+    found = s.find_first_not_of("doing");
+    cout<<found<<endl;//0
+    found = s.find_last_not_of("doing");
+    cout<<found<<endl;//44
+    string s1{"abc"}, s2{"xyz"};
+    if(s1>s2){
+        cout<<"right";
+    }
+    else
+    {
+        cout<<"wrong"; // wrong
+    }
+    // s1.compare(s2); // +ve if s1 > s2 else -ve and 0 for equal
+    // s1.compare(2,3, s2); // compare s1 from 2nd till 3 charachters with s2;
+    // temp = s1 + s2;// operator overloading here is expensive for huge inputs
+    
+    
     return 0;
 }
