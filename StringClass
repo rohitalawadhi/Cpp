@@ -206,3 +206,53 @@ int main()
     // stod, stol, stof, lexical_cast, stringstream
     return 0;
 }
+
+
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string s{"variety is the spice of life"};
+    int num = count(s.begin(), s.end(), 'e');
+    cout<<num<<endl; //4
+    num = count_if(s.begin(), s.end(), [](char c){
+        return (c <= 'e' and c >= 'a');
+    });
+    cout<<num<<endl;// 6
+    
+    s = "Goodness is better than beauty";
+    auto it = search_n(s.begin(), s.end() + 20, 2, 's');
+    s.erase(it, it + 5);
+    cout<<s<<endl;// Goodne better than beauty
+    s.insert(it, 3, 'x');// Goodnexxx better than beauty
+    cout<<s<<endl;
+    s.replace(it, it + 3, 3, 'y');// replacing substring
+    cout<<s<<endl;//Goodneyyy better than beauty
+    
+    //cout<<is_permutation(s.begin(), s.end(), s2.begin());// s is is_permutation of s2;
+    replace(s.begin(), s.end(), 'e', ' ');// replacig charachters
+    cout<<s<<endl;// Goodn yyy b tt r than b auty
+    
+    string s2{""};
+    transform(s.begin(), s.end(), s.begin(), [](char c){
+        if(c < 'n')
+            return 'a';
+        else
+            return 'z';
+    });
+    cout<<s<<endl;// azzazazzzaaazzazazaazaaaazzz
+    
+    s ="abcdefg";
+    rotate(s.begin(), s.begin() + 2, s.end());
+    cout<<s<<endl;// cdefgab
+    /*
+    string s ;
+    u16string s2; // string char16_t  for 16 bit systems strings
+    u32string s2; // string char32_t for 32 bits
+    wstring s0; // for wide srting
+    to_wstring(); exception for wide strings
+    */
+    
+    return 0;
+}
