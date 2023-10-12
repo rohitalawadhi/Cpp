@@ -37,3 +37,73 @@ int main()
     
     return 0;
 }
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string s{"Hello"};
+    //s.pop_front() and s.push_front() not available like vector as its expensive.
+    s.push_back('s');
+    cout<<s<<endl; // Hellos
+    s[2] = 'y'; // Heylos
+    cout<<s<<endl;
+    // s[20] = 'p';// undefined behavior
+    // cout<<s<<endl; or access of beyond limits is undefined behaviour
+    s.at(0) = 'p';
+    cout<<s<<endl;// peylos
+    //s.at(10) = 'p';
+    //cout<<s<<endl;
+    //terminate called after throwing an instance of 'std::out_of_range'
+    //what():  basic_string::at: __n (which is 10) >= this->size() (which is 6)
+    
+    auto j = s.front();
+    cout<<j<<endl;// p
+    j = s.back();
+    cout<<j<<endl;// s
+    s.pop_back();
+    cout<<s<<endl;// peylo
+    string::iterator it = s.begin();
+    cout<<*it<<endl; // p
+    string::iterator it1 = s.end();
+    cout<<*(it1-1)<<endl; // o
+    string s1(s.begin(), s.begin() + 1);
+    cout<<s1<<endl;//p
+    
+    string f{"rohit"}, d;
+    d.assign(f);
+    cout<<d<<endl; // rohit
+    d.assign(f, 2, 4);
+    cout<<d<<endl; // hit
+    d.assign("hell");
+    cout<<d<<endl; // hell
+    d.assign("hell", 2);
+    cout<<d<<endl; // he
+    //works in modern c++
+    d.assign(f, 2);
+    cout<<d<<endl; // hit
+    d.assign(3, 's');
+    cout<<d<<endl; //sss
+    d.assign({'a','b','c'});
+    cout<<d<<endl;//abc
+    
+    d.append(" rohit");
+    cout<<d<<endl;// abc rohit
+    d.insert(1, " alawadhi "); // a alawadhi bc rohit
+    cout<<d<<endl;
+    d.insert(1, "inside", 2); // ain alawadhi bc rohit
+    d.clear();
+    d = {"alawadhi"};
+    d.replace(1,3, f, 1,2);
+    cout<<d<<endl;// aohadhi
+    d.erase(2, 2);
+    cout<<d<<endl;// aodhi
+    
+    cout<<d.substr(2,3)<<endl;// dhi
+    d = "rohit";
+    d.c_str(); // "rohit\0", s.data() is same post c++11;
+    return 0;
+}
