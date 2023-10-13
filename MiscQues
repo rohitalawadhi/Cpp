@@ -41,5 +41,100 @@ int main()
     return 0;
 }
 
+What is the initilaised first whn object is created?
+member variables or constructor?
 
+its member variables
 
+#include <iostream>
+
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A";
+    }
+};
+
+class B: public A{
+    A a;
+public:
+    B(){
+        cout<<"Inside B";
+    }
+};
+
+int main()
+{
+    B b;// inside Ainside AInside B
+    return 0;
+}
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+    A(int y){
+        cout<<"inside A"<<y<<endl;
+    }
+};
+
+class B: public A{
+    A a{2};// A a(2); doesnt work; // error: expected identifier before numeric constant, error: expected ‘,’ or ‘...’ before numeric constant
+public:
+    B(){
+        cout<<"Inside B";
+    }
+};
+
+int main()
+{
+    B b;
+    //inside A
+    //inside A2
+    //Inside B
+    return 0;
+}
+Note the initialisation changes here when called from the constructor of B
+
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+    A(int y){
+        cout<<"inside A"<<y<<endl;
+    }
+};
+
+class B: public A{
+    A a{2};
+public:
+    B(): A(3){
+        cout<<"Inside B";
+    }
+};
+
+int main()
+{
+    B b;
+    /*
+    inside A3
+    inside A2
+    Inside B
+    */
+    return 0;
+}
+
+Whats the error in creating objects with new and normally
+ B b = new B();
+error: conversion from ‘B*’ to non-scalar type ‘B’ requested
+
+new returns an address of the new object created and requires a pointer to store it. needs to be deleted after from heap.
+
+While B b;
+is on stack and clears up when the scope ends.
