@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+};
+
+class B: public A{
+public:
+    B(){
+        throw 2;
+        cout<<"Inside B";
+    }
+    ~B(){
+        cout<<"I am destructor";
+    }
+};
+
+int main()
+{
+    try{
+        B b;
+        //inside A
+        //exception here
+    }
+    catch(...){
+        cout<<"exception here";
+    }
+    return 0;
+}
+
+// Constrcutor throws exception , object is not created and hence destructor also not called.
+
+If constructor is created via delegation then destructor is called:
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+};
+
+class B: public A{
+public:
+    B(){}
+    B(int):B(){
+        throw 2;
+        cout<<"Inside B";
+    }
+    ~B(){
+        cout<<"I am destructor";
+    }
+};
+
+int main()
+{
+    try{
+        B b;
+        // inside A
+        // I am destructor
+    }
+    catch(...){
+        cout<<"exception here";
+    }
+    return 0;
+}
