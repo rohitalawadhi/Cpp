@@ -1,0 +1,16 @@
+https://www.learncpp.com/cpp-tutorial/a1-static-and-dynamic-libraries/
+Static library : compiled and linked directly to the program, feels like written part of your source code. 
+Windows: .lib file
+linux: .a file
+
+Part of executable, so its heavy. Always need vesion of library with your program.
+
+Dynamic library : routines that are loaded into application during runtime, doesnt become part of the program. Since not llinked to your program hence they need to explicitly loaded and interfaced with program.
+Windows: .dll file
+linux: .so file
+
+Many Programs share one copy of the library hence space is saved. They can be upgraded without replacing all of the executables that use it.
+
+How to use:
+Download the rpm(linux) or zip(Windows)
+Install. Put the header and lib files in proper places, Link those files.
