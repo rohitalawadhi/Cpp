@@ -65,5 +65,99 @@ int main()
     catch(...){
         cout<<"exception here";
     }
+    //b.fn();// error
+    //error: use of undeclared identifier 'b'
     return 0;
 }
+
+Are exceptions allowed in destructors in c++11 ? No
+
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+};
+
+class B: public A{
+public:
+    B(int){
+        cout<<"Inside B";
+    }
+    ~B() noexcept(false) {
+        throw 2;
+        cout<<"I am destructor";
+    }
+};
+
+int main()
+{
+    try{
+        B b(2);
+    }
+    catch(...){
+        cout<<"i am inside catch";
+    }
+    return 0;
+}
+
+main.cpp: In destructor ‘B::~B()’:
+main.cpp:16:9: warning: ‘throw’ will always call ‘terminate’ [-Wterminate]
+   16 |         throw 2;
+      |         ^~~~~~~
+main.cpp:16:9: note: in C++11 destructors default to ‘noexcept’
+inside A
+terminate called after throwing an instance of 'int'
+
+Fix: use  noexcept(false)
+
+Then ans is
+
+inside A
+Inside B
+i am inside catch
+
+But what if while unwinding from B , A also throws exception?
+It has two exceptions then and the program terminates then.
+
+
+#include <iostream>
+using namespace std;
+class A{
+public:
+    A(){
+        cout<<"inside A"<<endl;
+    }
+    ~A()  noexcept(false){
+        throw 2;
+        cout<<"I am A destructor";
+    }
+};
+
+class B: public A{
+public:
+    B(int){
+        cout<<"Inside B";
+    }
+    ~B()  noexcept(false){
+        throw 2;
+        cout<<"I am B destructor";
+    }
+};
+
+int main()
+{
+    try{
+        B b(2);
+    }
+    catch(...){
+        cout<<"i am inside catch";
+    }
+    return 0;
+}
+
+error:
+inside A
+terminate called after throwing an instance of 'int'
