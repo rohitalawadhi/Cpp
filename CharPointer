@@ -7,8 +7,10 @@ int main()
 {
     //read only operation is preferred in c++ for string to char pointer
     const char *ptr = "rohit";
-    cout<<ptr[2]; // h
-    
+    cout<<ptr[2]<<*ptr; // h r
+    ptr++;
+    cout<<ptr<< *ptr; // ohit o
+
     // without const is forbidden and produces undefined behaviour if ptr is modified and used
     char *ptr1 = "rohit";
     ptr1[2] = 'k';
