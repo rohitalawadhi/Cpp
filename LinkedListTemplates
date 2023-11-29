@@ -1,0 +1,94 @@
+#include <iostream>
+
+template <typename T>
+class Node {
+public:
+    T* data;
+    Node* next;
+};
+
+template <typename T>
+class List {
+    public:
+    Node<T>* head;
+    Node<T>* tail;
+   
+    void add(T* data) {
+        Node<T>* newNode = new Node<T>;
+        newNode->data = data;
+        newNode->next = NULL;
+       
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        }
+        else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+   
+    void printList() {
+        Node<T>* current = head;
+        while (current != NULL) {
+        std::cout << *(current->data) << std::endl;
+        current = current->next;
+        }
+    }
+   
+    void updateNode(int index, T* newData) {
+        Node<T>* current = head;
+        for (int i = 0; i < index; i++) {
+            if (current == NULL) {
+                std::cout << "Invalid index" << std::endl;
+                return;
+            }
+            current = current->next;
+        }
+        current->data = newData;
+    }
+       
+    void deleteNode(int index) {
+        Node<T>* current = head;
+        Node<T>* previous;
+        for (int i = 0; i < index; i++) {
+            if (current == NULL) {
+                std::cout << "Invalid index" << std::endl;
+                return;
+            }
+            previous = current;
+            current = current->next;
+        }
+        if (current == head) {
+             head = current->next;
+        }
+        else {
+             previous->next = current->next;
+        }
+        delete current;
+    }
+};
+
+int main() {
+    List<int> list;
+   
+    int v1 = 10;
+    int* value1ptr = &v1;
+    int v2 = 100;
+    int* value2ptr = &v2;
+   
+    list.add(value1ptr);
+    list.add(value2ptr);
+    list.printList();
+   
+    std::cout<<std::endl;
+   
+    int newData = 200; int *newDataPtr = &newData;
+    list.updateNode(1, newDataPtr);
+    list.printList();
+   
+    std::cout<<std::endl;
+   
+    list.deleteNode(0);
+    list.printList();
+}
