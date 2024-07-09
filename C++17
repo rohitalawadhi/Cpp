@@ -1,0 +1,10 @@
+
+// Print parent path of file
+#include <filesystem>
+#include<iostream>
+
+int main(){
+    std::filesystem::path fs{"/home/rohit.alawadhi/Documents/abc/hnod/cpp/mapview-client/assets/styles/ocm-normal/manifest.json"};
+    std::cout<<fs.parent_path(); //      /home/rohit.alawadhi/Documents/abc/hnod/cpp/mapview-client/assets/styles/ocm-normal
+    return 0;
+}
