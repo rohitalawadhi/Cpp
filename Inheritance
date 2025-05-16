@@ -1,0 +1,63 @@
+class Base
+{
+public:
+    int m_id {};
+
+    Base(int id=0)
+        : m_id{ id }
+    {
+    }
+
+    int getId() const { return m_id; }
+};
+
+class Derived: public Base
+{
+public:
+    double m_cost {};
+
+    Derived(double cost=0.0)
+        : m_cost{ cost }
+    {
+    }
+
+    double getCost() const { return m_cost; }
+};
+With non-derived classes, constructors only have to worry about their own members. For example, consider Base. We can create a Base object like this:
+
+int main()
+{
+    Base base{ 5 }; // use Base(int) constructor
+
+    return 0;
+}
+
+
+Here’s what actually happens when base is instantiated:
+
+Memory for base is set aside
+The appropriate Base constructor is called
+The member initializer list initializes variables
+The body of the constructor executes
+Control is returned to the caller
+
+
+int main()
+{
+    Derived derived{ 1.3 }; // use Derived(double) constructor
+
+    return 0;
+}
+
+
+Memory for derived is set aside (enough for both the Base and Derived portions)
+The appropriate Derived constructor is called
+The Base object is constructed first using the appropriate Base constructor. If no base constructor is specified, the default constructor will be used.
+
+Or agar base me aise default constructor or parameterised hot to fer isko ambigous ho jata hai hai like this
+public:
+    Base(int id = 0)
+        : m_id{ id } {}
+     Base(){}
+
+error: call of overloaded ‘Base()’ is ambiguous
