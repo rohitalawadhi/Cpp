@@ -53,11 +53,75 @@ int main()
 Memory for derived is set aside (enough for both the Base and Derived portions)
 The appropriate Derived constructor is called
 The Base object is constructed first using the appropriate Base constructor. If no base constructor is specified, the default constructor will be used.
+Or isme ye bhi fark nahi padta base ki call kaha hai jaise:
+    Derived(double cost=0.0)
+        : m_cost{ cost }, Base{xyz}
+Isme compiler apne aap base dhund ke call kar lega!!
 
 Or agar base me aise default constructor or parameterised hot to fer isko ambigous ho jata hai hai like this
 public:
-    Base(int id = 0)
+    Base(int id = 0)// ye isme wo zero initialise ko ambigous bana deta hai
         : m_id{ id } {}
      Base(){}
 
 error: call of overloaded ‘Base()’ is ambiguous
+
+Base ke variables ap initialiser list of derived me nahi daal sakte kyuki c++ compiler kehta hai initialiser list me const or refernce variable 
+bhi set kar sakte hai to agar aise kiya (neeche likha hai) to base me call jayegi or jo variable const ya ref wala hai wo set hoga or same varible 
+derived ke constructor me set karne ki koshish karega which is wrong. islie nhi karne deta. 
+class Derived: public Base
+{
+public:
+    double m_cost {};
+
+    Derived(double cost=0.0, int id=0)
+        // does not work
+        : m_cost{ cost }
+        , m_id{ id }
+    {
+    }
+
+    double getCost() const { return m_cost; }
+};
+
+
+Par aap constructor body me kar sakte ho set if the variable isnt const or ref
+
+Base me base ka material hota hai or derived me base plus derived ka, neeche dekho isme derived me x ya value initialise hua hai kyuki wo uska hi part hai 
+. print me dekho base or derived ka apna apna value aa rha hai.
+#include <iostream>
+#include <string>
+#include <string_view>
+class Base{
+    const int x;
+    public:
+    Base(int c):x{c}{}
+    void fn(){
+        std::cout << x << std::endl;
+    }
+};
+class Derived: public Base{
+    int y;
+    public:
+    Derived(int x): Base{x}
+    {}
+};
+
+int main()
+{
+    Base b(9);
+    Derived d(10);
+    d.fn();
+    b.fn();
+    return 0;
+}
+
+Inheritance me bas apne se ek class pehle ka hi constrctor call kar sakte ho. jaise A:B hai or B:C
+
+to C se A ke constructor ko call nahi kar sakte only B ko kr skte ho..
+
+
+Also
+If no base class constructor is specified, the default base class constructor will be used. In that case, if no default base
+class constructor can be found (or created by default), the compiler will display an error. The classes are then constructed
+in order from most base to most derived.
